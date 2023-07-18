@@ -1,15 +1,24 @@
 version: '3.1'
 services:
-  stats-server:
+  postgresql:
+    # образ, из которого должен быть запущен контейнер
+    image: postgres:16beta1-bullseye
+    # volume и связанная с ним директория в контейнере
+    volumes:
+      - /var/lib/postgresql/data/
+    # переменные окружения
+    environment:
+      - POSTGRES_DB=stats
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    ports:
+      - "6541:5432"
+
+  server:
+    build: statistic/statistic-service
     ports:
       - "9090:9090"
-
-  stats-db:
-    image: postgres:14-alpine
-
-  ewm-service:
-    ports:
-      - "8080:8080"
-
-  ewm-db:
-    image: postgres:14-alpine
+    # "зависит от",
+    depends_on:
+      - postgresql
+    # переменные окружения
