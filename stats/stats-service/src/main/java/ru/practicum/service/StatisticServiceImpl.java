@@ -57,7 +57,7 @@ public class StatisticServiceImpl implements StatisticService {
         LocalDateTime endFormat = LocalDateTime.parse(end, dateTimeFormatter);
         checkPeriod(startFormat, endFormat);
         Collection<StatisticOutDto> resultCollection;
-        if (uris != null){
+        if (uris != null) {
             if (unique) {
                 log.info("getStatsWithUniqIp {}", uris);
                 resultCollection = statisticRepository.getStatsUniqIp(startFormat, endFormat, uris);
