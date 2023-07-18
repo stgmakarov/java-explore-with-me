@@ -1,8 +1,9 @@
-version: '3.1'
+version: '3.8'
 services:
   postgresql:
     # образ, из которого должен быть запущен контейнер
     image: postgres:16beta1-bullseye
+    container_name: stats_database
     # volume и связанная с ним директория в контейнере
     volumes:
       - /var/lib/postgresql/data/
@@ -15,10 +16,18 @@ services:
       - "6541:5432"
 
   server:
-    build: statistic/stats-server
+    build: stats/stats-server
+    image: stats-service
+    container_name: stats-service
     ports:
       - "9090:9090"
     # "зависит от",
     depends_on:
       - postgresql
     # переменные окружения
+    environment:
+      - DB_HOST=postgresql
+      - DB_PORT=5432
+      - DB_NAME=stats
+      - DB_USER=test
+      - DB_PASS=test
