@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.common.GlobalConsts;
 import ru.practicum.dto.StatisticInDto;
 import ru.practicum.dto.StatisticOutDto;
 import ru.practicum.exception.RequestError;
@@ -25,7 +27,7 @@ public class StatisticServiceImpl implements StatisticService {
 
     private final StatisticRepository statisticRepository;
     private final AppsRepository appsRepository;
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
 
     /**
      * Сохранение статистики
@@ -52,6 +54,7 @@ public class StatisticServiceImpl implements StatisticService {
      * @return
      */
     @Override
+    @Transactional
     public Collection<StatisticOutDto> getStats(String start, String end, List<String> uris, boolean unique) {
         LocalDateTime startFormat = LocalDateTime.parse(start, dateTimeFormatter);
         LocalDateTime endFormat = LocalDateTime.parse(end, dateTimeFormatter);
@@ -77,7 +80,7 @@ public class StatisticServiceImpl implements StatisticService {
 
         return resultCollection;
     }
-
+    @Transactional
     private AppsModel getOrCreateApp(StatisticInDto statisticInDto) {
         return appsRepository.getAppByName(statisticInDto.getApp())
                 .orElseGet(() -> appsRepository.save(StatisticMapper.toApp(statisticInDto)));

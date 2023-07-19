@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import ru.practicum.common.GlobalConsts;
 import ru.practicum.dto.StatisticInDto;
 import ru.practicum.dto.StatisticOutDto;
 
@@ -22,7 +23,7 @@ public class StatisticClient {
     @Value("${statistic-server}")
     private String statServUrl;
     private final RestTemplate restTemplate = new RestTemplate();
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
 
     public void save(StatisticInDto statisticInDto) {
         log.info("Save req {}", statisticInDto);

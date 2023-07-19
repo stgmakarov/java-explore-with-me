@@ -27,6 +27,7 @@
 
 	<modules>
 		<module>stats</module>
+		<module>common</module>
 	</modules>
 
 	<properties>
