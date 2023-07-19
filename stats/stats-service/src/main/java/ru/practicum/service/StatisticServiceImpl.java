@@ -80,6 +80,7 @@ public class StatisticServiceImpl implements StatisticService {
 
         return resultCollection;
     }
+
     @Transactional
     private AppsModel getOrCreateApp(StatisticInDto statisticInDto) {
         return appsRepository.getAppByName(statisticInDto.getApp())
