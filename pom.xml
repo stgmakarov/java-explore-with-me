@@ -11,11 +11,24 @@
 	</parent>
 
 	<name>Explore With Me</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.28</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 
 	<groupId>ru.practicum</groupId>
 	<artifactId>explore-with-me</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+
+	<modules>
+		<module>stats</module>
+		<module>common</module>
+	</modules>
 
 	<properties>
 		<java.version>11</java.version>
