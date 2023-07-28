@@ -63,7 +63,7 @@ public class StatisticServiceImpl implements StatisticService {
         Collection<StatisticOutDto> resultCollection;
         if (uris != null) {
             List<String> nUris = uris.stream()
-                    .map(s -> s.replace("[","").replace("]",""))
+                    .map(s -> s.replace("[", "").replace("]", ""))
                     .collect(Collectors.toList());
             if (unique) {
                 log.info("getStatsWithUniqIp {}", nUris);

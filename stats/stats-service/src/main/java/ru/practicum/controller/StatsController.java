@@ -1,6 +1,5 @@
 package ru.practicum.controller;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,9 @@ public class StatsController {
     @Autowired
     private StatisticService statisticService;
 
-    /**Сохранение статистики
+    /**
+     * Сохранение статистики
+     *
      * @param statisticInDto
      */
     @PostMapping(path = "/hit")
@@ -26,11 +27,13 @@ public class StatsController {
         statisticService.saveStatistics(statisticInDto);
     }
 
-    /**Чтение статситики
-     * @param start     с
-     * @param end       по
-     * @param uris      URI
-     * @param unique    флаг уникальности
+    /**
+     * Чтение статситики
+     *
+     * @param start  с
+     * @param end    по
+     * @param uris   URI
+     * @param unique флаг уникальности
      * @return
      */
     @GetMapping(path = "/stats")

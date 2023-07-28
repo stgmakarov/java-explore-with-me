@@ -20,10 +20,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Slf4j
 public class StatisticClient {
-    @Value("${statistic-server}")
-    private String statServUrl;
     private final RestTemplate restTemplate = new RestTemplate();
     private final DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
+    @Value("${statistic-server}")
+    private String statServUrl;
 
     public void save(StatisticInDto statisticInDto) {
         log.info("Save req {}", statisticInDto);
