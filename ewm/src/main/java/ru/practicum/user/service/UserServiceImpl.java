@@ -8,8 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.practicum.error.RequestError;
-import ru.practicum.user.dto.UserInDto;
 import ru.practicum.user.dto.UserDto;
+import ru.practicum.user.dto.UserInDto;
 import ru.practicum.user.mapper.UserMapper;
 import ru.practicum.user.model.User;
 import ru.practicum.user.repository.UserRepository;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     public Collection<UserDto> getAllUser(List<Integer> ids) {
         log.info("Запрос на получение пользователей из списка: {}", ids);
         Collection<User> users;
-        if(ids != null)
+        if (ids != null)
             users = userRepository.getUsersByIds(ids);
         else
             users = userRepository.getAllUsers();
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         log.info("Запрос на получение пользователей из списка : {} с использованием пагинации", ids);
         from = from / size;
         Page<User> users;
-        if(ids!=null)
+        if (ids != null)
             users = userRepository.getUsersByIdsWithPagination(ids, PageRequest.of(from, size));
         else
             users = userRepository.getAllUsersWithPagination(PageRequest.of(from, size));

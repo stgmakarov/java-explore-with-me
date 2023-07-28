@@ -2,7 +2,8 @@ package ru.practicum.event;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.event.dto.*;
+import ru.practicum.event.dto.EventOutDto;
+import ru.practicum.event.dto.EventShortOutDto;
 import ru.practicum.event.service.EventService;
 import ru.practicum.state.SortState;
 
@@ -22,28 +23,28 @@ public class EventController {
 
     @GetMapping()
     public Collection<EventShortOutDto> findPublicEventsWithParameters(@RequestParam(value = "text", required = false)
-                                                                    String text,
+                                                                       String text,
                                                                        @RequestParam(value = "categories",
-                                                                            required = false)
-                                                                    Collection<Integer> categories,
+                                                                               required = false)
+                                                                       Collection<Integer> categories,
                                                                        @RequestParam(value = "paid",
-                                                                            required = false) Boolean paid,
+                                                                               required = false) Boolean paid,
                                                                        @RequestParam(value = "rangeStart",
-                                                                            required = false)
-                                                                    String rangeStart,
+                                                                               required = false)
+                                                                       String rangeStart,
                                                                        @RequestParam(value = "rangeEnd", required = false)
-                                                                    String rangeEnd,
+                                                                       String rangeEnd,
                                                                        @RequestParam(value = "onlyAvailable",
-                                                                            required = false, defaultValue = "false")
-                                                                    Boolean onlyAvailable,
+                                                                               required = false, defaultValue = "false")
+                                                                       Boolean onlyAvailable,
                                                                        @RequestParam(value = "sort",
-                                                                            defaultValue = "EVENT_DATE") SortState sort,
+                                                                               defaultValue = "EVENT_DATE") SortState sort,
                                                                        @PositiveOrZero
-                                                                    @RequestParam(value = "from", defaultValue = "0")
-                                                                    Integer from,
+                                                                       @RequestParam(value = "from", defaultValue = "0")
+                                                                       Integer from,
                                                                        @Positive
-                                                                    @RequestParam(value = "size", defaultValue = "10")
-                                                                    Integer size) {
+                                                                       @RequestParam(value = "size", defaultValue = "10")
+                                                                       Integer size) {
         return eventService.findPublicEventsWithParameters(text, categories, paid, rangeStart, rangeEnd, onlyAvailable,
                 sort, from, size, request.getRemoteAddr());
     }

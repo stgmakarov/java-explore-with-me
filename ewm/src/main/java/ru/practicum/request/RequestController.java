@@ -46,7 +46,7 @@ public class RequestController {
     public EventReqStOutDto changeStateUserRequests(@PathVariable Integer userId,
                                                     @PathVariable Integer eventId,
                                                     @RequestBody
-                                                                  EventInDto requests) {
+                                                    EventInDto requests) {
         return requestService.changeStateUserRequests(userId, eventId, requests);
     }
 }

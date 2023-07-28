@@ -7,8 +7,8 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.practicum.category.model.Category;
 import ru.practicum.event.dto.EventRequestNumDto;
-import ru.practicum.state.State;
 import ru.practicum.location.model.Location;
+import ru.practicum.state.State;
 import ru.practicum.user.model.User;
 
 import javax.persistence.*;

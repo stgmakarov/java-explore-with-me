@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import ru.practicum.event.model.Event;
 import ru.practicum.request.model.Request;
 import ru.practicum.state.RequestState;
-
 import ru.practicum.user.model.User;
 
 import java.util.Collection;

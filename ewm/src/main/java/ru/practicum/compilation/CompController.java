@@ -17,13 +17,13 @@ public class CompController {
 
     @GetMapping()
     public Collection<CompOutDto> getCompilationWithParam(@RequestParam(value = "pinned", defaultValue = "false")
-                                                              boolean pinned,
+                                                          boolean pinned,
                                                           @PositiveOrZero
-                                                              @RequestParam(value = "from", defaultValue = "0")
-                                                              Integer from,
+                                                          @RequestParam(value = "from", defaultValue = "0")
+                                                          Integer from,
                                                           @Positive
-                                                              @RequestParam(value = "size", defaultValue = "10")
-                                                              Integer size) {
+                                                          @RequestParam(value = "size", defaultValue = "10")
+                                                          Integer size) {
 
         return compService.getCompilationWithParam(pinned, from, size);
     }

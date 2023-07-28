@@ -31,16 +31,16 @@ public class EventAdminInDto {
     @Size(min = 3, max = 120)
     String title;
 
-    public ActionState getStateAction(){
+    public ActionState getStateAction() {
         try {
             return ActionState.valueOf(stateAction);
-        } catch (Exception e){
+        } catch (Exception e) {
             return ActionState.PUBLISH_EVENT;
         }
     }
 
     public void setStateAction(String stateAction) {
-        if(stateAction!=null)
+        if (stateAction != null)
             this.stateAction = stateAction;
         else
             this.stateAction = ActionState.PUBLISH_EVENT.toString();

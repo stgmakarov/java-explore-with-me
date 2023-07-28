@@ -15,6 +15,6 @@ import java.util.List;
 public class AdmCompInDto {
     List<Integer> events;
     Boolean pinned;
-    @Size(max=50)
+    @Size(max = 50)
     String title;
 }

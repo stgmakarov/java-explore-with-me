@@ -15,18 +15,18 @@ import ru.practicum.dto.StatisticInDto;
 import ru.practicum.dto.StatisticOutDto;
 import ru.practicum.error.RequestError;
 import ru.practicum.event.dto.EventOutDto;
+import ru.practicum.event.dto.EventRequestNumDto;
 import ru.practicum.event.dto.EventShortOutDto;
 import ru.practicum.event.dto.NewEventInDto;
 import ru.practicum.event.mapper.EventMapper;
 import ru.practicum.event.model.Event;
 import ru.practicum.event.repository.EventRepository;
-import ru.practicum.event.dto.EventRequestNumDto;
+import ru.practicum.location.model.Location;
+import ru.practicum.location.service.LocationService;
 import ru.practicum.state.NewEventState;
 import ru.practicum.state.RequestState;
 import ru.practicum.state.SortState;
 import ru.practicum.state.State;
-import ru.practicum.location.model.Location;
-import ru.practicum.location.service.LocationService;
 import ru.practicum.user.dto.UserEventInDto;
 import ru.practicum.user.model.User;
 import ru.practicum.user.service.UserService;
@@ -40,6 +40,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class EventServiceImpl implements EventService {
+    private final String app = "ewm";
+    private final DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
     @Autowired
     private UserService userService;
     @Autowired
@@ -50,9 +52,6 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
     @Autowired
     private StatisticClient statisticClient;
-    private final String app = "ewm";
-
-    private final DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
 
     @Override
     public EventOutDto createNewEvent(Integer userId, NewEventInDto eventDto) {
@@ -222,8 +221,8 @@ public class EventServiceImpl implements EventService {
             rangeStart = LocalDateTime.now().format(dateTimeFormatter);
         }
 
-        for(int c: categories){
-            if (c<=0) throw new RequestError(HttpStatus.BAD_REQUEST, "Категория должна быть >0");
+        for (int c : categories) {
+            if (c <= 0) throw new RequestError(HttpStatus.BAD_REQUEST, "Категория должна быть >0");
         }
 
         Collection<Event> events = eventRepository.findPublicEventsWithParameters(text, categories, paid, rangeStart,

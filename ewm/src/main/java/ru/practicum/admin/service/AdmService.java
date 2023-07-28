@@ -1,15 +1,15 @@
 package ru.practicum.admin.service;
 
 import ru.practicum.admin.dto.AdmCompInDto;
-import ru.practicum.compilation.dto.CompOutDto;
-import ru.practicum.compilation.dto.CompInDto;
 import ru.practicum.admin.dto.EventAdminInDto;
-import ru.practicum.category.dto.CategoryOutDto;
 import ru.practicum.category.dto.CategoryInDto;
+import ru.practicum.category.dto.CategoryOutDto;
+import ru.practicum.compilation.dto.CompInDto;
+import ru.practicum.compilation.dto.CompOutDto;
 import ru.practicum.event.dto.EventOutDto;
 import ru.practicum.state.State;
-import ru.practicum.user.dto.UserInDto;
 import ru.practicum.user.dto.UserDto;
+import ru.practicum.user.dto.UserInDto;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,8 +1,8 @@
 package ru.practicum.compilation.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.practicum.compilation.dto.CompOutDto;
 import ru.practicum.compilation.dto.CompInDto;
+import ru.practicum.compilation.dto.CompOutDto;
 import ru.practicum.compilation.model.Compilation;
 import ru.practicum.event.dto.EventShortOutDto;
 import ru.practicum.event.model.Event;

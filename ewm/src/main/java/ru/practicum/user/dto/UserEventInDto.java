@@ -31,17 +31,17 @@ public class UserEventInDto {
     @Size(min = 3, max = 120)
     String title;
 
-    public void setStateAction(String stateAction) {
-        if (stateAction != null)
-            this.stateAction = stateAction;
-        else this.stateAction = NewEventState.SEND_TO_REVIEW.toString();
-    }
-
     public NewEventState getStateAction() {
         try {
             return NewEventState.valueOf(stateAction);
         } catch (Exception ignored) {
             return NewEventState.SEND_TO_REVIEW;
         }
+    }
+
+    public void setStateAction(String stateAction) {
+        if (stateAction != null)
+            this.stateAction = stateAction;
+        else this.stateAction = NewEventState.SEND_TO_REVIEW.toString();
     }
 }

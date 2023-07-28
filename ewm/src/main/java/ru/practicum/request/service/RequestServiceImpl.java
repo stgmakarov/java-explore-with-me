@@ -1,6 +1,5 @@
 package ru.practicum.request.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,12 +10,12 @@ import ru.practicum.event.dto.EventReqStOutDto;
 import ru.practicum.event.mapper.EventMapper;
 import ru.practicum.event.model.Event;
 import ru.practicum.event.service.EventService;
+import ru.practicum.request.dto.ParticipationRequestDto;
 import ru.practicum.request.mapper.RequestMapper;
 import ru.practicum.request.model.Request;
+import ru.practicum.request.repository.RequestRepository;
 import ru.practicum.state.RequestState;
 import ru.practicum.state.State;
-import ru.practicum.request.dto.ParticipationRequestDto;
-import ru.practicum.request.repository.RequestRepository;
 import ru.practicum.user.model.User;
 import ru.practicum.user.service.UserService;
 

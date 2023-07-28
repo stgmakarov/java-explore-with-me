@@ -4,16 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.admin.dto.AdmCompInDto;
-import ru.practicum.compilation.dto.CompOutDto;
-import ru.practicum.compilation.dto.CompInDto;
 import ru.practicum.admin.dto.EventAdminInDto;
 import ru.practicum.admin.service.AdmService;
-import ru.practicum.category.dto.CategoryOutDto;
 import ru.practicum.category.dto.CategoryInDto;
+import ru.practicum.category.dto.CategoryOutDto;
+import ru.practicum.compilation.dto.CompInDto;
+import ru.practicum.compilation.dto.CompOutDto;
 import ru.practicum.event.dto.EventOutDto;
 import ru.practicum.state.State;
-import ru.practicum.user.dto.UserInDto;
 import ru.practicum.user.dto.UserDto;
+import ru.practicum.user.dto.UserInDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -47,21 +47,21 @@ public class AdmController {
 
     @GetMapping("/events")
     public Collection<EventOutDto> getAllEvents(@RequestParam(value = "users", required = false)
-                                                 List<Integer> users,
+                                                List<Integer> users,
                                                 @RequestParam(value = "states", required = false)
-                                                 List<State> states,
+                                                List<State> states,
                                                 @RequestParam(value = "categories", required = false)
-                                                 List<Integer> categories,
+                                                List<Integer> categories,
                                                 @RequestParam(value = "rangeStart", required = false)
-                                                 String rangeStart,
+                                                String rangeStart,
                                                 @RequestParam(value = "rangeEnd", required = false)
-                                                 String rangeEnd,
+                                                String rangeEnd,
                                                 @PositiveOrZero
-                                                 @RequestParam(value = "from", defaultValue = "0", required = false)
-                                                 Integer from,
+                                                @RequestParam(value = "from", defaultValue = "0", required = false)
+                                                Integer from,
                                                 @Positive
-                                                 @RequestParam(value = "size", defaultValue = "10", required = false)
-                                                 Integer size) {
+                                                @RequestParam(value = "size", defaultValue = "10", required = false)
+                                                Integer size) {
 
         return admService.findEvents(users, states, categories, rangeStart, rangeEnd, from, size);
     }

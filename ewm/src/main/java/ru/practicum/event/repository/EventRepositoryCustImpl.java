@@ -21,10 +21,10 @@ import static ru.practicum.state.State.PUBLISHED;
 
 @Repository
 public class EventRepositoryCustImpl implements EventRepositoryCust {
+    private final DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
     //Делаем инъекцию EntityManager в бин
     @PersistenceContext
     private EntityManager entityManager;
-    private final DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
 
     @Override
     public List<Event> findEventsForAdmin(List<Integer> users, List<State> states,
@@ -114,7 +114,7 @@ public class EventRepositoryCustImpl implements EventRepositoryCust {
         return entityManager.createQuery(query).setFirstResult(from).setMaxResults(size).getResultList();
     }
 
-    private boolean isNullOrEmpty(String text){
+    private boolean isNullOrEmpty(String text) {
         if (text == null) return true;
         return text.isEmpty();
     }

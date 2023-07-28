@@ -23,12 +23,12 @@ public class UserController {
     @GetMapping("/{userId}/events")
     public Collection<EventShortOutDto> findAllFounderEvents(@PathVariable Integer userId,
                                                              @PositiveOrZero
-                                                          @RequestParam(value = "from", defaultValue = "0",
-                                                                  required = false) Integer from,
+                                                             @RequestParam(value = "from", defaultValue = "0",
+                                                                     required = false) Integer from,
                                                              @Positive
-                                                          @RequestParam(value = "size", defaultValue = "10",
-                                                                  required = false)
-                                                          Integer size) {
+                                                             @RequestParam(value = "size", defaultValue = "10",
+                                                                     required = false)
+                                                             Integer size) {
         return eventService.findAllFounderEvents(userId, from, size);
     }
 

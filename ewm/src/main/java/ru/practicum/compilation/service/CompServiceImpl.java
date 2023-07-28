@@ -77,7 +77,7 @@ public class CompServiceImpl implements CompService {
                 eventService.getEventShortListWithSort(compilationResult.getEvents(), false));
     }
 
-    private boolean isNullOrEmpty(List<Integer> list){
+    private boolean isNullOrEmpty(List<Integer> list) {
         if (list == null) return true;
         return list.isEmpty();
     }

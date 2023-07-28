@@ -5,15 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.practicum.admin.dto.AdmCompInDto;
-import ru.practicum.common.GlobalConsts;
-import ru.practicum.compilation.dto.CompOutDto;
-import ru.practicum.compilation.dto.CompInDto;
 import ru.practicum.admin.dto.EventAdminInDto;
-import ru.practicum.category.dto.CategoryOutDto;
 import ru.practicum.category.dto.CategoryInDto;
+import ru.practicum.category.dto.CategoryOutDto;
 import ru.practicum.category.mapper.CategoryMapper;
 import ru.practicum.category.model.Category;
 import ru.practicum.category.service.CategoryService;
+import ru.practicum.common.GlobalConsts;
+import ru.practicum.compilation.dto.CompInDto;
+import ru.practicum.compilation.dto.CompOutDto;
 import ru.practicum.compilation.mapper.CompMapper;
 import ru.practicum.compilation.model.Compilation;
 import ru.practicum.compilation.repository.CompRepository;
@@ -28,8 +28,8 @@ import ru.practicum.location.model.Location;
 import ru.practicum.location.service.LocationService;
 import ru.practicum.state.ActionState;
 import ru.practicum.state.State;
-import ru.practicum.user.dto.UserInDto;
 import ru.practicum.user.dto.UserDto;
+import ru.practicum.user.dto.UserInDto;
 import ru.practicum.user.service.UserService;
 
 import java.time.LocalDateTime;
@@ -43,6 +43,7 @@ import java.util.Objects;
 @Slf4j
 @Service
 public class AdmServiceImpl implements AdmService {
+    DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
     @Autowired
     private LocationService locationService;
     @Autowired
@@ -55,7 +56,6 @@ public class AdmServiceImpl implements AdmService {
     private CompService compService;
     @Autowired
     private CompRepository compRepository;
-    DateTimeFormatter dateTimeFormatter = GlobalConsts.getDateTimeFormatter();
 
     @Override
     public CategoryOutDto createNewCategory(CategoryInDto categoryInDto) {
@@ -106,7 +106,7 @@ public class AdmServiceImpl implements AdmService {
                     "новая дата события уже наступила");
         }
 
-        if ( oldEvent.getState() == State.PUBLISHED && eventAdminInDto.getStateAction() == ActionState.REJECT_EVENT ){
+        if (oldEvent.getState() == State.PUBLISHED && eventAdminInDto.getStateAction() == ActionState.REJECT_EVENT) {
             log.info("событие можно отклонить, только если оно еще не опубликовано. Текущий статус {}",
                     oldEvent.getState());
             throw new RequestError(HttpStatus.CONFLICT, "Невозможно изменить статус");
@@ -142,7 +142,7 @@ public class AdmServiceImpl implements AdmService {
     public CompOutDto createNewCompilation(CompInDto compInDto) {
         log.info("Создание новой подборки {}", compInDto);
         Collection<Event> events;
-        if(compInDto.getEvents() != null)
+        if (compInDto.getEvents() != null)
             events = eventService.getEventListByEventIds(compInDto.getEvents());
         else
             events = new ArrayList<>();
