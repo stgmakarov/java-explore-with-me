@@ -2,7 +2,7 @@ version: '3.1'
 services:
   postgresql:
     # образ, из которого должен быть запущен контейнер
-    image: postgres:16beta1-bullseye
+    image: postgres:16beta2-bullseye
     container_name: stats_database
     # volume и связанная с ним директория в контейнере
     volumes:
@@ -15,7 +15,7 @@ services:
     ports:
       - "6541:5432"
 
-  server:
+  serverstat:
     build: stats/stats-service
     image: stats-service
     container_name: stats-service
@@ -31,3 +31,38 @@ services:
       - DB_NAME=stats
       - DB_USER=test
       - DB_PASS=test
+
+  postgresqlewm:
+    # образ, из которого должен быть запущен контейнер
+    image: postgres:16beta2-bullseye
+    container_name: ewm_database
+    # volume и связанная с ним директория в контейнере
+    volumes:
+      - /var/lib/postgresql/data/
+    # переменные окружения
+    environment:
+      - POSTGRES_DB=ewm
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    ports:
+      - "6542:5433"
+
+  serverewm:
+    build: ewm
+    image: ewm-service
+    container_name: ewm-service
+    ports:
+      - "8080:8080"
+    # "зависит от",
+    depends_on:
+      - postgresqlewm
+      - serverstat
+    # переменные окружения
+    environment:
+      - DB_HOST=postgresqlewm
+      - DB_PORT=5432
+      - DB_NAME=ewm
+      - DB_USER=test
+      - DB_PASS=test
+      - STATS_URI = serverstat
+      - STATS_PORT = 9090
