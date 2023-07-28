@@ -1,6 +1,7 @@
 package ru.practicum.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.StatisticInDto;
@@ -12,9 +13,9 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 public class StatsController {
-    private final StatisticService statisticService;
+    @Autowired
+    private StatisticService statisticService;
 
     /**Сохранение статистики
      * @param statisticInDto

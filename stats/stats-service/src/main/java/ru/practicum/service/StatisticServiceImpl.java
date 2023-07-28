@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -61,12 +62,15 @@ public class StatisticServiceImpl implements StatisticService {
         checkPeriod(startFormat, endFormat);
         Collection<StatisticOutDto> resultCollection;
         if (uris != null) {
+            List<String> nUris = uris.stream()
+                    .map(s -> s.replace("[","").replace("]",""))
+                    .collect(Collectors.toList());
             if (unique) {
-                log.info("getStatsWithUniqIp {}", uris);
-                resultCollection = statisticRepository.getStatsUniqIp(startFormat, endFormat, uris);
+                log.info("getStatsWithUniqIp {}", nUris);
+                resultCollection = statisticRepository.getStatsUniqIp(startFormat, endFormat, nUris);
             } else {
-                log.info("getStatsWithNotUniqIp {}", uris);
-                resultCollection = statisticRepository.getStatsWOUniqIp(startFormat, endFormat, uris);
+                log.info("getStatsWithNotUniqIp {}", nUris);
+                resultCollection = statisticRepository.getStatsWOUniqIp(startFormat, endFormat, nUris);
             }
         } else {
             if (unique) {
