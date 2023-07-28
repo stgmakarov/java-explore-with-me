@@ -64,5 +64,5 @@ services:
       - DB_NAME=ewm
       - DB_USER=test
       - DB_PASS=test
-      - STATS_URI = serverstat
-      - STATS_PORT = 9090
+      - STATS_URI=serverstat
+      - STATS_PORT=9090
