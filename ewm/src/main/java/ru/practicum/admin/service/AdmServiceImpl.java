@@ -59,25 +59,25 @@ public class AdmServiceImpl implements AdmService {
 
     @Override
     public CategoryOutDto createNewCategory(CategoryInDto categoryInDto) {
-        log.info("adm.createNewCategory {}", categoryInDto);
+        log.info("Создание новой категории администратором {}", categoryInDto);
         return categoryService.create(categoryInDto);
     }
 
     @Override
     public CategoryOutDto changeCategory(Integer catId, CategoryInDto categoryInDto) {
-        log.info("adm.changeCategory {}", catId);
+        log.info("Изменение категории администратором {}", catId);
         return categoryService.update(catId, categoryInDto);
     }
 
     @Override
     public UserDto createUser(UserInDto userInDto) {
-        log.info("adm.createUser {}", userInDto);
+        log.info("Создание нового пользователя администратором {}", userInDto);
         return userService.addNewUser(userInDto);
     }
 
     @Override
     public Collection<UserDto> getAllUsers(List<Integer> ids, Integer from, Integer size) {
-        log.info("adm.getAllUsers {}", ids);
+        log.info("Чтение всех пользователей {}", ids);
         if (from == null && size == null) {
             return userService.getAllUser(ids);
         } else {

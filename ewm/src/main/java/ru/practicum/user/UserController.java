@@ -1,6 +1,7 @@
 package ru.practicum.user;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.event.dto.EventOutDto;
@@ -18,7 +19,8 @@ import java.util.Collection;
 @AllArgsConstructor
 @RequestMapping("/users")
 public class UserController {
-    private final EventService eventService;
+    @Autowired
+    private EventService eventService;
 
     @GetMapping("/{userId}/events")
     public Collection<EventShortOutDto> findAllFounderEvents(@PathVariable Integer userId,

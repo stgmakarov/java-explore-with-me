@@ -14,5 +14,13 @@ import java.util.Collection;
 @AllArgsConstructor
 public class EventInDto {
     Collection<Integer> requestIds;
-    RequestState status;
+    String status;
+
+    public RequestState getStatus() {
+        if (status != null) {
+            if (!status.isEmpty())
+                return RequestState.valueOf(status);
+            else return RequestState.PENDING;
+        } else return RequestState.PENDING;
+    }
 }

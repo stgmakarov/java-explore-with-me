@@ -1,6 +1,7 @@
 package ru.practicum.request;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.event.dto.EventInDto;
@@ -14,8 +15,8 @@ import java.util.Collection;
 @RestController
 @AllArgsConstructor
 public class RequestController {
-
-    private final RequestService requestService;
+    @Autowired
+    private RequestService requestService;
 
     @GetMapping("/users/{userId}/events/{eventId}/requests")
     public Collection<ParticipationRequestDto> getRequestListForParticipationEvent(@PathVariable Integer userId,
