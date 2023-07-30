@@ -17,19 +17,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UserEventInDto {
     @Size(min = 20, max = 7000)
-    String description;
+    private String description;
     @Size(min = 20, max = 2000)
-    String annotation;
-    Integer category;
+    private String annotation;
+    private Integer category;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    LocalDateTime eventDate;
-    LocationDto location;
-    Boolean paid;
-    Integer participantLimit;
-    Boolean requestModeration;
-    String stateAction;
+    private LocalDateTime eventDate;
+    private LocationDto location;
+    private Boolean paid;
+    private Integer participantLimit;
+    private Boolean requestModeration;
+    private String stateAction;
     @Size(min = 3, max = 120)
-    String title;
+    private String title;
 
     public NewEventState getStateAction() {
         try {

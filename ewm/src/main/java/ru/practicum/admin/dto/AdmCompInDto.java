@@ -13,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdmCompInDto {
-    List<Integer> events;
-    Boolean pinned;
+    private List<Integer> events;
+    private Boolean pinned;
     @Size(max = 50)
-    String title;
+    private String title;
 }

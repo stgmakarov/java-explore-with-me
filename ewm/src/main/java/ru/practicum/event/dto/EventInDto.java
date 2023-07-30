@@ -13,8 +13,8 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventInDto {
-    Collection<Integer> requestIds;
-    String status;
+    private Collection<Integer> requestIds;
+    private String status;
 
     public RequestState getStatus() {
         if (status != null) {

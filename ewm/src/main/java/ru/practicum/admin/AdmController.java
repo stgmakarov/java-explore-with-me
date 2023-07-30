@@ -57,10 +57,10 @@ public class AdmController {
                                                 @RequestParam(value = "rangeEnd", required = false)
                                                 String rangeEnd,
                                                 @PositiveOrZero
-                                                @RequestParam(value = "from", defaultValue = "0", required = false)
+                                                @RequestParam(value = "from", defaultValue = "0")
                                                 Integer from,
                                                 @Positive
-                                                @RequestParam(value = "size", defaultValue = "10", required = false)
+                                                @RequestParam(value = "size", defaultValue = "10")
                                                 Integer size) {
 
         return admService.findEvents(users, states, categories, rangeStart, rangeEnd, from, size);
@@ -76,10 +76,10 @@ public class AdmController {
     @GetMapping("/users")
     public Collection<UserDto> getAllUsers(@RequestParam(value = "ids", required = false) List<Integer> ids,
                                            @PositiveOrZero
-                                           @RequestParam(value = "from", required = false, defaultValue = "0")
+                                           @RequestParam(value = "from", defaultValue = "0")
                                            Integer from,
                                            @Positive
-                                           @RequestParam(value = "size", required = false, defaultValue = "10")
+                                           @RequestParam(value = "size", defaultValue = "10")
                                            Integer size) {
         return admService.getAllUsers(ids, from, size);
     }

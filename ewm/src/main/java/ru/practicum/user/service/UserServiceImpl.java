@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.error.RequestError;
 import ru.practicum.user.dto.UserDto;
 import ru.practicum.user.dto.UserInDto;
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserDto addNewUser(UserInDto userInDto) {
         log.info("Добавление нового пользователя {} в базу данных", userInDto);
         User newUser = userRepository.save(UserMapper.toUser(userInDto));
@@ -71,6 +73,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(Integer userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {

@@ -14,9 +14,9 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompInDto {
-    Collection<Integer> events;
-    boolean pinned;
+    private Collection<Integer> events;
+    private boolean pinned;
     @NotBlank
     @Size(max = 50)
-    String title;
+    private String title;
 }

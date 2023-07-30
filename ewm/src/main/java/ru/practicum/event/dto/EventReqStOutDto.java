@@ -13,6 +13,6 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventReqStOutDto {
-    Collection<ParticipationRequestDto> confirmedRequests;
-    Collection<ParticipationRequestDto> rejectedRequests;
+    private Collection<ParticipationRequestDto> confirmedRequests;
+    private Collection<ParticipationRequestDto> rejectedRequests;
 }

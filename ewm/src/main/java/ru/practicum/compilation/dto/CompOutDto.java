@@ -13,8 +13,8 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompOutDto {
-    Integer id;
-    Collection<EventShortOutDto> events;
-    boolean pinned;
-    String title;
+    private Integer id;
+    private Collection<EventShortOutDto> events;
+    private boolean pinned;
+    private String title;
 }

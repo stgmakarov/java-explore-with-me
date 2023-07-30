@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.admin.dto.AdmCompInDto;
 import ru.practicum.compilation.dto.CompOutDto;
 import ru.practicum.compilation.mapper.CompMapper;
@@ -52,6 +53,7 @@ public class CompServiceImpl implements CompService {
     }
 
     @Override
+    @Transactional
     public CompOutDto updateCompilation(Integer compId, AdmCompInDto compilationRequest) {
         Compilation compilation = compRepository.findById(compId).orElse(null);
         if (compilation == null) {
@@ -83,6 +85,7 @@ public class CompServiceImpl implements CompService {
     }
 
     @Override
+    @Transactional
     public void deleteCompilation(Integer compId) {
         Compilation compilation = compRepository.findById(compId).orElse(null);
         if (compilation == null) {

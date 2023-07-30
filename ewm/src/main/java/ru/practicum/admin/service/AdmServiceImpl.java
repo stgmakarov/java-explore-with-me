@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.admin.dto.AdmCompInDto;
 import ru.practicum.admin.dto.EventAdminInDto;
 import ru.practicum.category.dto.CategoryInDto;
@@ -58,18 +59,21 @@ public class AdmServiceImpl implements AdmService {
     private CompRepository compRepository;
 
     @Override
+    @Transactional
     public CategoryOutDto createNewCategory(CategoryInDto categoryInDto) {
         log.info("Создание новой категории администратором {}", categoryInDto);
         return categoryService.create(categoryInDto);
     }
 
     @Override
+    @Transactional
     public CategoryOutDto changeCategory(Integer catId, CategoryInDto categoryInDto) {
         log.info("Изменение категории администратором {}", catId);
         return categoryService.update(catId, categoryInDto);
     }
 
     @Override
+    @Transactional
     public UserDto createUser(UserInDto userInDto) {
         log.info("Создание нового пользователя администратором {}", userInDto);
         return userService.addNewUser(userInDto);
@@ -86,6 +90,7 @@ public class AdmServiceImpl implements AdmService {
     }
 
     @Override
+    @Transactional
     public EventOutDto changeEvent(Integer eventId, EventAdminInDto eventAdminInDto) {
         Event oldEvent = eventService.getEventById(eventId);
         if (oldEvent.getEventDate().isBefore(LocalDateTime.now().plusHours(1))) {
@@ -139,6 +144,7 @@ public class AdmServiceImpl implements AdmService {
     }
 
     @Override
+    @Transactional
     public CompOutDto createNewCompilation(CompInDto compInDto) {
         log.info("Создание новой подборки {}", compInDto);
         Collection<Event> events;
@@ -154,24 +160,28 @@ public class AdmServiceImpl implements AdmService {
     }
 
     @Override
+    @Transactional
     public CompOutDto updateCompilation(Integer compId, AdmCompInDto compilationRequest) {
         log.info("Изменение подборки с id {} администратором", compId);
         return compService.updateCompilation(compId, compilationRequest);
     }
 
     @Override
+    @Transactional
     public void deleteUser(Integer userId) {
         log.info("Запрос на удаление администратором пользователя {}", userId);
         userService.deleteUser(userId);
     }
 
     @Override
+    @Transactional
     public void deleteCategory(Integer catId) {
         log.info("Запрос на удалении администратором категории {}", catId);
         categoryService.deleteById(catId);
     }
 
     @Override
+    @Transactional
     public void deleteCompilation(Integer compId) {
         log.info("Запрос на удаление администратором подборки {}", compId);
         compService.deleteCompilation(compId);

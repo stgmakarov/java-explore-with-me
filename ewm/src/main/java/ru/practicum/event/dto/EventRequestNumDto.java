@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventRequestNumDto {
-    Integer eventId;
-    Integer confirmedRequestSize;
+    private Integer eventId;
+    private Integer confirmedRequestSize;
 }

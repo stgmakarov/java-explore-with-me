@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.category.mapper.CategoryMapper;
 import ru.practicum.category.model.Category;
 import ru.practicum.category.service.CategoryService;
@@ -54,6 +55,7 @@ public class EventServiceImpl implements EventService {
     private StatisticClient statisticClient;
 
     @Override
+    @Transactional
     public EventOutDto createNewEvent(Integer userId, NewEventInDto eventDto) {
         User user = userService.getUserById(userId);
         if (eventDto.getEventDate() != null && eventDto.getEventDate()
@@ -86,6 +88,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public EventOutDto saveChangeEventForAdmin(Event event) {
         log.info("Сохранение изменений в событии {} администратором", event);
         event.setPublishedOn(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
@@ -112,6 +115,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public EventOutDto changeEventByUser(Integer userId, Integer eventId, UserEventInDto eventUserRequest) {
         User user = userService.getUserById(userId);
         Event event = getEventById(eventId);

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.error.RequestError;
 import ru.practicum.event.dto.EventInDto;
 import ru.practicum.event.dto.EventReqStOutDto;
@@ -36,6 +37,7 @@ public class RequestServiceImpl implements RequestService {
     private UserService userService;
 
     @Override
+    @Transactional
     public ParticipationRequestDto createNewRequestFromUser(Integer userId, Integer eventId) {
         User user = userService.getUserById(userId);
         Event event = eventService.getEventById(eventId);
@@ -108,6 +110,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    @Transactional
     public ParticipationRequestDto cancelParticipationRequest(Integer userId, Integer requestId) {
         User user = userService.getUserById(userId);
         Request request = getRequestById(requestId);
@@ -124,6 +127,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    @Transactional
     public EventReqStOutDto changeStateUserRequests(Integer userId, Integer eventId,
                                                     EventInDto requests) {
         User user = userService.getUserById(userId);

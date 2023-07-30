@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.category.dto.CategoryInDto;
 import ru.practicum.category.dto.CategoryOutDto;
 import ru.practicum.category.mapper.CategoryMapper;
@@ -23,6 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
+    @Transactional
     public CategoryOutDto create(CategoryInDto categoryInDto) {
         log.info("Добавление новой категории {}", categoryInDto);
         Category category = categoryRepository.save(CategoryMapper.toCategory(categoryInDto));
@@ -47,6 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer catId) {
         checkContainCategory(catId);
         log.info("Удаление категории {}", catId);
@@ -54,6 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CategoryOutDto update(Integer catId, CategoryInDto categoryInDto) {
         Category category = checkContainCategory(catId);
         log.info("Изменение категории {} на категорию {}", catId, categoryInDto);

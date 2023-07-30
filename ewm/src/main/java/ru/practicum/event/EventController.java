@@ -35,7 +35,7 @@ public class EventController {
                                                                        @RequestParam(value = "rangeEnd", required = false)
                                                                        String rangeEnd,
                                                                        @RequestParam(value = "onlyAvailable",
-                                                                               required = false, defaultValue = "false")
+                                                                               defaultValue = "false")
                                                                        Boolean onlyAvailable,
                                                                        @RequestParam(value = "sort",
                                                                                defaultValue = "EVENT_DATE") SortState sort,

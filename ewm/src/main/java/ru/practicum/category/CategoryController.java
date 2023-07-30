@@ -16,17 +16,17 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    Collection<CategoryOutDto> getCategories(@PositiveOrZero
-                                             @RequestParam(value = "from", defaultValue = "0", required = false)
-                                             Integer from,
-                                             @Positive
-                                             @RequestParam(value = "size", defaultValue = "10", required = false)
-                                             Integer size) {
+    public Collection<CategoryOutDto> getCategories(@PositiveOrZero
+                                                    @RequestParam(value = "from", defaultValue = "0")
+                                                    Integer from,
+                                                    @Positive
+                                                    @RequestParam(value = "size", defaultValue = "10")
+                                                    Integer size) {
         return categoryService.getAll(from, size);
     }
 
     @GetMapping("/{catId}")
-    CategoryOutDto getById(@PathVariable Integer catId) {
+    public CategoryOutDto getById(@PathVariable Integer catId) {
         return categoryService.getById(catId);
     }
 }
