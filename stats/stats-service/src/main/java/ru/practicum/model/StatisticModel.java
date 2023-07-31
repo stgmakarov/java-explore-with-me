@@ -15,23 +15,25 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "statistics", schema = "public")
 @NamedNativeQuery(name = "FindStatsWOUniqueIp",
-        query = "select a.name as app,  s.uri, count(s.ip) as hits from statistics s " +
+        query = "select a.name as app,  s.uri as uri, count(s.ip) as hits from statistics s " +
                 "join apps a " +
                 "on s.app_id = a.id " +
                 "where s.timestamp > :start " +
-                "and  s.timestamp < :end and (s.uri in :uris) " +
+                "and  s.timestamp < :end " +
+                "and (s.uri in :uris) " +
                 "group by s.uri, a.name order by hits desc", resultSetMapping = "StatsOutDto")
 
 @NamedNativeQuery(name = "FindStatsUniqueIp",
-        query = "select a.name as app,  s.uri, count(distinct s.ip) as hits from statistics s " +
+        query = "select a.name as app,  s.uri as uri, count(distinct s.ip) as hits from statistics s " +
                 "join apps a " +
                 "on s.app_id = a.id " +
                 "where s.timestamp > :start " +
-                "and  s.timestamp < :end and (s.uri in :uris) " +
+                "and  s.timestamp < :end " +
+                "and (s.uri in :uris) " +
                 "group by s.uri, a.name order by hits desc", resultSetMapping = "StatsOutDto")
 
 @NamedNativeQuery(name = "FindStatsWOUriWOUniqueIp",
-        query = "select a.name as app,  s.uri, count(s.ip) as hits from statistics s " +
+        query = "select a.name as app,  s.uri as uri, count(s.ip) as hits from statistics s " +
                 "join apps a " +
                 "on s.app_id = a.id " +
                 "where s.timestamp > :start " +
@@ -39,7 +41,7 @@ import java.time.LocalDateTime;
                 "group by s.uri, a.name order by hits desc", resultSetMapping = "StatsOutDto")
 
 @NamedNativeQuery(name = "FindStatsWOUriUniqueIp",
-        query = "select a.name as app,  s.uri, count(distinct s.ip) as hits from statistics s " +
+        query = "select a.name as app,  s.uri as uri, count(distinct s.ip) as hits from statistics s " +
                 "join apps a " +
                 "on s.app_id = a.id " +
                 "where s.timestamp > :start " +
