@@ -58,7 +58,9 @@ public class UserController {
         return eventService.changeEventByUser(userId, eventId, eventUserRequest);
     }
 
-    /** подписка на пользователя
+    /**
+     * подписка на пользователя
+     *
      * @param userId
      * @param authorId
      */
@@ -70,7 +72,9 @@ public class UserController {
         userService.subscribeToAuthor(userId, authorId);
     }
 
-    /**получение всех подписчиков пользователя
+    /**
+     * получение всех подписчиков пользователя
+     *
      * @param userId
      * @return
      */
@@ -79,7 +83,9 @@ public class UserController {
         return userService.getSubscribersForAuthor(userId);
     }
 
-    /**отписка от пользователя
+    /**
+     * отписка от пользователя
+     *
      * @param userId
      * @param authorId
      */

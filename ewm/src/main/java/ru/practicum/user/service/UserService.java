@@ -21,6 +21,7 @@ public interface UserService {
     void deleteUser(Integer userId);
 
     Collection<UserShortDto> getSubscribersForAuthor(Integer authorId);
+
     void subscribeToAuthor(Integer userId, Integer authorId);
 
     void unSubscribeFromAuthor(Integer userId, Integer authorId);

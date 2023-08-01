@@ -11,7 +11,6 @@ import ru.practicum.event.model.Event;
 import ru.practicum.state.State;
 
 import java.time.LocalDateTime;
-
 import java.util.Collection;
 
 @Repository
