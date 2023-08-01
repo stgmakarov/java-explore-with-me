@@ -28,6 +28,7 @@ import ru.practicum.state.NewEventState;
 import ru.practicum.state.RequestState;
 import ru.practicum.state.SortState;
 import ru.practicum.state.State;
+import ru.practicum.subscription.service.SubscriberService;
 import ru.practicum.user.dto.UserEventInDto;
 import ru.practicum.user.model.User;
 import ru.practicum.user.service.UserService;
@@ -53,6 +54,8 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
     @Autowired
     private StatisticClient statisticClient;
+    @Autowired
+    private SubscriberService subscriberService;
 
     @Override
     @Transactional
@@ -381,5 +384,18 @@ public class EventServiceImpl implements EventService {
         finalTimePublishedEvent = timePublishedEvent.stream().sorted(Comparator
                 .comparing(LocalDateTime::getDayOfYear).reversed()).collect(Collectors.toList());
         return finalTimePublishedEvent.get(0);
+    }
+
+    @Override
+    public Collection<EventShortOutDto> getActualEventsForSubscriber(Integer userId) {
+        User user = userService.getUserById(userId);
+        log.info("Пользователь {} запросил список событий, " +
+                "организаторами которых являются пользователи из его подписок", user);
+        Collection<Integer> authorsIds = new ArrayList<>();
+        subscriberService.getAuthorsForSubscriber(user)
+                .forEach(subscriber -> authorsIds.add(subscriber.getAuthor().getId()));
+        Collection<Event> events = eventRepository
+                .getActualEventsForSubscriber(authorsIds, State.PUBLISHED, LocalDateTime.now());
+        return getEventShortListWithSort(events, false);
     }
 }
