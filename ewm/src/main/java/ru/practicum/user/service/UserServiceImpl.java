@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.error.RequestError;
+import ru.practicum.subscription.service.SubscriberService;
 import ru.practicum.user.dto.UserDto;
 import ru.practicum.user.dto.UserInDto;
+import ru.practicum.user.dto.UserShortDto;
 import ru.practicum.user.mapper.UserMapper;
 import ru.practicum.user.model.User;
 import ru.practicum.user.repository.UserRepository;
@@ -25,6 +27,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private SubscriberService subscriberService;
 
     @Override
     @Transactional
@@ -82,5 +86,35 @@ public class UserServiceImpl implements UserService {
         }
         log.info("Пользователь {} удален", user);
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public Collection<UserShortDto> getSubscribersForAuthor(Integer authorId) {
+        User user = getUserById(authorId);
+        log.info("Список подписчиков пользователя {}", user);
+        List<UserShortDto> subList = new ArrayList<>();
+        subscriberService.getSubscribersForAuthor(user).forEach(subscriber ->
+                subList.add(UserMapper.toUserShortDto(subscriber.getSubscriber())));
+        return subList;
+    }
+
+    @Override
+    @Transactional
+    public void subscribeToAuthor(Integer userId, Integer authorId) {
+        User subscriber = getUserById(userId);
+        User author = getUserById(authorId);
+        log.info("Запрос от пользователя {} на подписку на пользователя {}",
+                subscriber, author);
+        subscriberService.subscribeToAuthor(subscriber, author);
+    }
+
+    @Override
+    @Transactional
+    public void unSubscribeFromAuthor(Integer userId, Integer authorId) {
+        User subscriber = getUserById(userId);
+        User author = getUserById(authorId);
+        log.info("Запрос от пользователя {} на отписку от обновлений пользователя {}",
+                subscriber, author);
+        subscriberService.unSubscribeFromAuthor(subscriber, author);
     }
 }

@@ -1,6 +1,6 @@
 package ru.practicum.event;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.event.dto.EventOutDto;
 import ru.practicum.event.dto.EventShortOutDto;
@@ -13,12 +13,12 @@ import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/events")
 public class EventController {
-
-    private final EventService eventService;
-    private final HttpServletRequest request;
+    @Autowired
+    private EventService eventService;
+    @Autowired
+    private HttpServletRequest request;
 
 
     @GetMapping()
@@ -52,6 +52,11 @@ public class EventController {
     @GetMapping("/{id}")
     public EventOutDto getEventById(@PathVariable Integer id) {
         return eventService.getFullEventById(id, request.getRemoteAddr());
+    }
+
+    @GetMapping("/subscribers/{userId}")
+    public Collection<EventShortOutDto> getActualEventsForSubscriber(@PathVariable Integer userId) {
+        return eventService.getActualEventsForSubscriber(userId);
     }
 
 }
